@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title_tag }}{% endblock %}
+{% block content %}
+<div class="article">
+    {{ post.title }}
+    {{ post.author.first_name }} {{ post.author.last_name }}
+    {{ post.post_date }}
+    {% if post.header_image %}
+        <img src="{{ post.header_image.url}}" alt="{{ post.image_alt}}">
+    {% endif %}
+    <p>{{ total_likes }} Likes</p>
+    <form action="{% url 'like_post' post.pk %}">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+            {% if liked %}
+                <button type="submit", name="post_id", method="POST", value="{{ post.id }}">Unlike</button>
+            {% else %}
+                <button type="submit", name="post_id", method="POST", value="{{ post.id }}">Like</button>
+            {% endif %}
+        {% else %}
+            <small><a href="{% url 'login' %}">sign in</a> or <a href="{% url 'register' %}">register</a> to like this post</small>
+        {% endif %}
+    </form>
+    <a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a>
+    {{ post.body | safe }}
+</div>
+{% endblock %}

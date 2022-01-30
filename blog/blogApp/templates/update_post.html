@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Create New Blog Post{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
+    <h2>Update {{ post.title }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_p}}
+            {{form.media}}
+        </table>
+        <button>Post</button>
+    </form>
+{% endif %}
+{% else %}
+    <h1>Sike you thought bitch</h1>
+{% endif %}
+{% endblock %}
