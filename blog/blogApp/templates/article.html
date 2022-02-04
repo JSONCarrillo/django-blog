@@ -23,5 +23,31 @@
     </form>
     <a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a>
     {{ post.body | safe }}
+    <h3>Comments</h3>
+    
+    <form method="POST" action="{% url 'article' post.pk%}">
+        {% csrf_token %}
+        <table>
+            {{ form.as_p}}
+            {{form.media}}
+        </table>
+        <button>Post Comment</button>
+    </form>
+
+    {% if not post.comments.all %}
+        <p>No comments yet, be the first!</p>
+    {% else %}
+        {% for comment in post.comments.all %}
+        <div>
+            <h4>{{ comment.name }} - {{ comment.date_added }}</h4>
+            <p>{{ comment.body }}</p>
+        </div>
+        {% endfor %}
+    {% endif %}
 </div>
+<script>
+    const commenter = "{{ user.id }}";
+    console.log
+    document.getElementById("commenter-box").value = author;
+</script>
 {% endblock %}

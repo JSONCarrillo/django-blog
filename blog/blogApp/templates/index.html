@@ -6,7 +6,7 @@
         {% if forloop.first %}
             <div class="blog-card" style="color:aliceblue">
                 <div class="card-content">
-                    <h2><a href="{% url 'article' post.pk %}">{{ post.title }}</a></h2>
+                    <h2><a href="{% url 'article' post.id %}">{{ post.title }}</a></h2>
                     <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
                     <small>{{ post.post_date }}</small>
                     <small><a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a></small>

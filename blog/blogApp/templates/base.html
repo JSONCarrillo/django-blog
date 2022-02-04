@@ -12,6 +12,9 @@
 </head>
 <body>
     <nav>
+        <div class="top-bar" style="width: 100vw; background-color: black; color: white;">
+            
+        </div>
         <div class="nav-container">
             <div>
                 <span class="logo"><a href="{% url 'index' %}">Jayce Carrillo</a></span>
@@ -29,13 +32,20 @@
                     </li>
                     {% endif %}
                     {% if user.is_authenticated %}
-                        {%if user.id == 1%}
+                        {%if user.profile.isWriter == True%}
                             <li class="link"><a href="{% url 'add-post' %}" >Create Post</a></li>
                             <li class="link"><a href="{% url 'add-category' %}">Create Category</a></li>
-                        {% endif %}     
-                        <li class="link"><a href="{% url 'edit-profile' %}">Profile</a></span>
-                        <li class="link"><a href="{% url 'logout' %}">Logout</a></span>
+                        {% endif %}
+                        {% if user.profile.profile_pic %}     
+                            <img src="{{user.profile.profile_pic.url}}">
+                        {% else %}
+                            <li><img src="{% static 'images/default-profile-pic.jpg' %}" style="width: 25px; border-radius: 60px;"></li>
+                        {% endif %}
+                        <li class="link"><a href="{% url 'edit-profile' %}">Profile</a></li>
+                        <li class="link"><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
+
+
                         <li class="link"><a href="{% url 'register' %}">Create an Account</a></li>
                         <li class="link"><a href="{% url 'login' %}">Login</a></li>
                     {% endif %}
@@ -45,5 +55,8 @@
     </nav>
     {% block content %}
     {% endblock %}
+    <footer>
+        <small>Powered by Ayetoo Technologies</small>
+    </footer>
 </body>
 </html>

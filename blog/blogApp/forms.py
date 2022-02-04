@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Category
+from .models import Post, Category, Comment
 
 choices = Category.objects.all().values_list('name', 'name')
 choice_list = []
@@ -39,6 +39,21 @@ class EditForm(forms.ModelForm):
             'article_hook' : forms.Textarea(),
             'body' : forms.Textarea(attrs={}),
             'image_alt' : forms.TextInput(attrs={}),
+        }
+
+        def __init__(self, *args, **kwargs):
+            super(SignUpForm, self).__init__(*args, **kwargs)
+            for fields in self.visible_fields():
+                fields.field.widget.attrs["class"] = 'post-forms'
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)
+
+        widgets = {
+            'body' : forms.Textarea(attrs={}),
+
         }
 
         def __init__(self, *args, **kwargs):
