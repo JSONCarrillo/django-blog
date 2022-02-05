@@ -114,3 +114,7 @@ class EditProfileView(UpdateView):
     template_name = "edit_profile.html"
     success_url = reverse_lazy('index')
 
+class UserProfileView(DetailView):
+    model = Profile
+    fields = '__all__'
+    template_name = 'user_profile.html'

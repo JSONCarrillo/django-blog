@@ -12,8 +12,16 @@
 </head>
 <body>
     <nav>
-        <div class="top-bar" style="width: 100vw; background-color: black; color: white;">
-            
+        <div class="top-bar">
+            <div class="top-bar-content">
+                {% if user.is_authenticated %}
+                    <span class="top-bar-text">Hello, {{ user.first_name }}!</span>
+                    <span class="top-bar-text"><a href="{% url 'logout' %}">Logout</a></span>
+                {% else %}
+                    <span class="top-bar-text"><a href="{% url 'register' %}">Create an Account</a></span>
+                    <span class="top-bar-text"><a href="{% url 'login' %}">Login</a></span>
+                {% endif %}
+            </div>
         </div>
         <div class="nav-container">
             <div>
@@ -22,32 +30,25 @@
             <div class="nav-links">
                 <ul class="links">
                     {% if category_menu %}
-                    <li class="item dropdown" data-dropdown>
-                        <button class="link dropdown-button" data-dropdown-button>Categories</button>
-                        <ul class="dropdown-menu">
                             {% for item in category_menu %}
-                                <li><a href="{% url 'categories' item|slugify %}">{{ item }}</a></li>
+                                <li class="link"><a href="{% url 'categories' item|slugify %}">{{ item }}</a></li>
                             {% endfor %}
-                        </ul>
-                    </li>
                     {% endif %}
                     {% if user.is_authenticated %}
-                        {%if user.profile.isWriter == True%}
+                        {% if user.profile.isWriter == True %}
                             <li class="link"><a href="{% url 'add-post' %}" >Create Post</a></li>
                             <li class="link"><a href="{% url 'add-category' %}">Create Category</a></li>
                         {% endif %}
-                        {% if user.profile.profile_pic %}     
-                            <img src="{{user.profile.profile_pic.url}}">
-                        {% else %}
-                            <li><img src="{% static 'images/default-profile-pic.jpg' %}" style="width: 25px; border-radius: 60px;"></li>
-                        {% endif %}
-                        <li class="link"><a href="{% url 'edit-profile' %}">Profile</a></li>
-                        <li class="link"><a href="{% url 'logout' %}">Logout</a></li>
+                        <div>
+                            {% if user.profile.profile_pic %}
+    
+                                <img src="{{ user.profile.profile_pic.url }}">
+                            {% else %}
+                                <li><img src="{% static 'images/default-profile-pic.jpg' %}" style="width: 25px; border-radius: 60px;"></li>
+                            {% endif %}
+                            <span>Profile</span>
+                        </div>
                     {% else %}
-
-
-                        <li class="link"><a href="{% url 'register' %}">Create an Account</a></li>
-                        <li class="link"><a href="{% url 'login' %}">Login</a></li>
                     {% endif %}
                 </ul>
             </div>

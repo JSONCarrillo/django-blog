@@ -21,6 +21,31 @@ nav{
     z-index: 3;
 }
 
+.top-bar{
+    color: white;
+    width: 100vw;
+    background-color: black;
+    display: inline-block;
+    height: 30px;
+}
+
+.top-bar-content{
+    margin: 5px auto;
+    
+    float: right;
+}
+
+.top-bar-text{
+    padding: 0 15px;
+}
+
+.top-bar-text a{
+    color: white;
+    text-decoration: none;
+}
+
+
+
 .nav-container{
     padding: 25px 25px;
     display: flex;
