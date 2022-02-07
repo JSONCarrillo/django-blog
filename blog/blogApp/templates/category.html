@@ -2,9 +2,10 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 {% if category_posts %}
-<div class="blog-links">
+<div class="body-container">
     <h2>{{ category }}</h2>
-    {% for post in category_posts %}
+    <div class="blog-list">
+        {% for post in category_posts %}
             <div class="blog-card">
                 <div class="card-content">
                     <h2><a href="{% url 'article' post.pk %}">{{ post.title }}</a></h2>
@@ -17,7 +18,8 @@
                     {% endif %}
                 </div>    
             </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 {% else %}
     <h1>Sucks to be you</h1>

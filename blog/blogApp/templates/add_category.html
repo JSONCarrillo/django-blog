@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Create New Category{% endblock %}
 {% block content %}
-{% if user.is_authenticated %}
+<div class="body-container">
+    {% if user.is_authenticated %}
+
     <h2>Create New Category</h2>
     <form method="post">
         {% csrf_token %}
@@ -10,7 +12,8 @@
         </table>
         <button>Create</button>
     </form>
-{% else %}
+    {% else %}
     <h1>Sike you thought bitch</h1>
-{% endif %}
+    {% endif %}
+</div>
 {% endblock %}

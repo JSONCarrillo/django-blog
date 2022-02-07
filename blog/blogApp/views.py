@@ -93,6 +93,12 @@ def categoryView(request, category):
     category_posts = Post.objects.filter(category=category.replace('-', ' '))
     return render(request, 'category.html', {'category' : category.title().replace('-', ' '), 'category_posts' : category_posts})
 
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(index, self).get_context_data(*args, **kwargs)
+        context["category_menu"] = category_menu
+        return context
+
 def LikeView(request, pk):
     post = get_object_or_404(Post, id=pk)
 

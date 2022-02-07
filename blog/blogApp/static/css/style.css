@@ -31,7 +31,6 @@ nav{
 
 .top-bar-content{
     margin: 5px auto;
-    
     float: right;
 }
 
@@ -43,8 +42,6 @@ nav{
     color: white;
     text-decoration: none;
 }
-
-
 
 .nav-container{
     padding: 25px 25px;
@@ -76,12 +73,11 @@ nav{
     color: black;
 }
 
-.blog-links{
+.blog-list{
     background-color: white;
     width: 75%;
     margin: 0 auto;
-    height: 1000vh;
-    overflow-y: scroll;
+    height: 100vh;
 }
 
 .blog-card{
@@ -103,32 +99,30 @@ nav{
     color: black;
 }
 
-.dropdown{
-    position: relative;    
+.body-container{
+    color: black;
+    background-color: white;
+    margin: 0 auto;
+    height: 100vh;
+    width: 75%;
 }
 
-.dropdown-menu {
-    position: absolute;
-    left: 0;
-    top: calc(100% + .25rem);
-    background-color: cornsilk;
-    padding: .75rem;
-    border-radius: .25rem;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
-    pointer-events: none;
+.likes-container{
+    display: flex;
 }
 
-.dropdown.active > .link + .dropdown-menu{
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+footer{
+    background-color: black;
+    justify-content: space-evenly;
 }
 
-.dropdown-button{
-    border: none;
-    background-color: rgba(0, 0, 0, 0);
-    cursor: pointer;
+.footer-link a{
+    text-decoration: none;
+    color: white;
+}
+
+form > p{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
 }

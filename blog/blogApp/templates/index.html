@@ -1,37 +1,39 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<div class="blog-links">
-    {% for post in object_list %}
-        {% if forloop.first %}
-            <div class="blog-card" style="color:aliceblue">
-                <div class="card-content">
-                    <h2><a href="{% url 'article' post.id %}">{{ post.title }}</a></h2>
-                    <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
-                    <small>{{ post.post_date }}</small>
-                    <small><a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a></small>
-                    <p>{{ post.article_hook }}</p>
-                    {% if user.is_authenticated and user.id == post.author.id %}
-                        <a href="{% url 'update-post' post.pk %}">edit post</a>
-                        <a href="{% url 'delete-post' post.pk %}">delete post</a>
-                    {% endif %}
-                </div>    
-            </div>
-        {% else %}
-            <div class="blog-card">
-                <div class="card-content">
-                    <h2><a href="{% url 'article' post.pk %}">{{ post.title }}</a></h2>
-                    <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
-                    <small>{{ post.post_date }}</small>
-                    <small><a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a></small>
-                    <p>{{ post.article_hook }}</p>
-                    {% if user.is_authenticated and user.id == post.author.id %}
-                        <a href="{% url 'update-post' post.pk %}">edit post</a>
-                        <a href="{% url 'delete-post' post.pk %}">delete post</a>
-                    {% endif %}
-                </div>    
-            </div>
-        {% endif %}
-    {% endfor %}
+<div class="blog-container">
+    <div class="blog-list">
+        {% for post in object_list %}
+            {% if forloop.last %}
+                <div class="blog-card" style="background-color:aliceblue">
+                    <div class="card-content">
+                        <h2><a href="{% url 'article' post.id %}">{{ post.title }}</a></h2>
+                        <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
+                        <small>{{ post.post_date }}</small>
+                        <small><a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a></small>
+                        <p>{{ post.article_hook }}</p>
+                        {% if user.is_authenticated and user.id == post.author.id %}
+                            <a href="{% url 'update-post' post.pk %}">edit post</a>
+                            <a href="{% url 'delete-post' post.pk %}">delete post</a>
+                        {% endif %}
+                    </div>    
+                </div>
+            {% else %}
+                <div class="blog-card">
+                    <div class="card-content">
+                        <h2><a href="{% url 'article' post.pk %}">{{ post.title }}</a></h2>
+                        <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
+                        <small>{{ post.post_date }}</small>
+                        <small><a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a></small>
+                        <p>{{ post.article_hook }}</p>
+                        {% if user.is_authenticated and user.id == post.author.id %}
+                            <a href="{% url 'update-post' post.pk %}">edit post</a>
+                            <a href="{% url 'delete-post' post.pk %}">delete post</a>
+                        {% endif %}
+                    </div>    
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

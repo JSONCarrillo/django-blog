@@ -24,39 +24,39 @@
             </div>
         </div>
         <div class="nav-container">
-            <div>
-                <span class="logo"><a href="{% url 'index' %}">Jayce Carrillo</a></span>
+            <div class="logo">
+                <span><a href="{% url 'index' %}">Jayce Carrillo</a></span>
             </div>
-            <div class="nav-links">
-                <ul class="links">
-                    {% if category_menu %}
-                            {% for item in category_menu %}
-                                <li class="link"><a href="{% url 'categories' item|slugify %}">{{ item }}</a></li>
-                            {% endfor %}
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                        {% if user.profile.isWriter == True %}
-                            <li class="link"><a href="{% url 'add-post' %}" >Create Post</a></li>
-                            <li class="link"><a href="{% url 'add-category' %}">Create Category</a></li>
-                        {% endif %}
-                        <div>
-                            {% if user.profile.profile_pic %}
-    
-                                <img src="{{ user.profile.profile_pic.url }}">
-                            {% else %}
-                                <li><img src="{% static 'images/default-profile-pic.jpg' %}" style="width: 25px; border-radius: 60px;"></li>
+            <div class="categories">
+                {% if category_menu %}
+                        {% for item in category_menu %}
+                            <span class="link"><a href="{% url 'categories' item|slugify %}">{{ item|title }}</a></span>
+                            {% if not forloop.last %}
+                                <span class="link"> | </span>
                             {% endif %}
-                            <span>Profile</span>
-                        </div>
+                        {% endfor %}
+                {% endif %}
+            </div>
+            <div class="profile-container">
+                {% if user.is_authenticated %}
+                    {% if user.profile.profile_pic %}
+                        <img src="{{ user.profile.profile_pic.url }}">
                     {% else %}
+                        <img src="{% static 'images/default-profile-pic.jpg' %}" style="width: 25px; border-radius: 60px;">
                     {% endif %}
-                </ul>
+                        <span style="color: black;">Profile</span>
+                    {% else %}
+                {% endif %}
             </div>
         </div>
     </nav>
     {% block content %}
     {% endblock %}
     <footer>
+        {% if user.profile.isWriter == True %}
+            <small class="footer-link"><a href="{% url 'add-post' %}" >Create Post</a></small>
+            <small class="footer-link"><a href="{% url 'add-category' %}">Create Category</a></small>
+        {% endif %}
         <small>Powered by Ayetoo Technologies</small>
     </footer>
 </body>
