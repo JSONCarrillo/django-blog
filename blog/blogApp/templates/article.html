@@ -2,37 +2,39 @@
 {% block title %}{{ post.title_tag }}{% endblock %}
 {% block content %}
 <div class="body-container">
-    <h1>{{ post.title }}</h1>
-    <br>
-    <small>{{ post.author.first_name }} {{ post.author.last_name }}</small>
-    <br>
-    <small>{{ post.post_date }}</small>
-    <br>
-    {% if post.header_image %}
-        <img src="{{ post.header_image.url}}" alt="{{ post.image_alt}}">
-    {% endif %}
-    <div class="likes-container">
-        <p>{{ total_likes }} Likes</p>
-        <form action="{% url 'like_post' post.pk %}">
-            {% csrf_token %}
-            {% if user.is_authenticated %}
-                {% if liked %}
-                    <button type="submit", name="post_id", method="POST", value="{{ post.id }}">Unlike</button>
+    <div class="article">
+        <h1>{{ post.title }}</h1>
+        <br>
+        <small>{{ post.author.first_name }} {{ post.author.last_name }}</small>
+        <br>
+        <small>{{ post.post_date }}</small>
+        <br>
+        {% if post.header_image %}
+            <img src="{{ post.header_image.url}}" alt="{{ post.image_alt}}">
+        {% endif %}
+        <div class="likes-container">
+            <p>{{ total_likes }} Likes</p>
+            <form action="{% url 'like_post' post.pk %}">
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                    {% if liked %}
+                        <button type="submit", name="post_id", method="POST", value="{{ post.id }}">Unlike</button>
+                    {% else %}
+                        <button type="submit", name="post_id", method="POST", value="{{ post.id }}">Like</button>
+                    {% endif %}
                 {% else %}
-                    <button type="submit", name="post_id", method="POST", value="{{ post.id }}">Like</button>
+                    <small><a href="{% url 'login' %}">sign in</a> or <a href="{% url 'register' %}">register</a> to like this post</small>
                 {% endif %}
-            {% else %}
-                <small><a href="{% url 'login' %}">sign in</a> or <a href="{% url 'register' %}">register</a> to like this post</small>
-            {% endif %}
-        </form>
+            </form>
+        </div>
+        <br>
+        <a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a>
+        <br>
+        <p>{{ post.body | safe }}</p>
     </div>
-    <br>
-    <a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a>
-    <br>
-    <p>{{ post.body | safe }}</p>
     <div>
         <h3>Comments</h3>
-        <form method="POST" action="{% url 'article' post.pk%}">
+        <form method="POST" action="{% url 'article' post.pk%}" class="comment-box">
             {% csrf_token %}
             <table>
                 {{ form.as_p}}
@@ -41,17 +43,18 @@
             <button>Post Comment</button>
         </form>
     </div>
-
-    {% if not post.comments.all %}
-        <p>No comments yet, be the first!</p>
-    {% else %}
-        {% for comment in post.comments.all %}
-        <div>
-            <h4>{{ comment.name }} - {{ comment.date_added }}</h4>
-            <p>{{ comment.body }}</p>
-        </div>
-        {% endfor %}
-    {% endif %}
+    <div class="comment-section">
+        {% if not post.comments.all %}
+            <p>No comments yet, be the first!</p>
+        {% else %}
+            {% for comment in post.comments.all %}
+            <div>
+                <h4>{{ comment.user }} - {{ comment.date_added }}</h4>
+                <p>{{ comment.body }}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}

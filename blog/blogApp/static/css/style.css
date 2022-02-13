@@ -9,8 +9,9 @@
 
 body{
     width: 100vw;
-    background-color: green;
+    background-color: white;
     overflow-x: hidden;
+    position: relative;
 }
 
 nav{
@@ -19,6 +20,7 @@ nav{
     background-color: white;
     position: sticky;
     z-index: 3;
+    box-shadow: 0 5px 2px 2px rgba(0, 0, 0, .2);
 }
 
 .top-bar{
@@ -47,6 +49,12 @@ nav{
     padding: 25px 25px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .links{
@@ -68,11 +76,6 @@ nav{
     
 }
 
-.dropdown.active > .link,
-.link:hover{
-    color: black;
-}
-
 .blog-list{
     background-color: white;
     width: 75%;
@@ -80,31 +83,31 @@ nav{
     height: 100vh;
 }
 
-.blog-card{
-    background-color: green;
-    width: 75%;
-    margin: 10px auto;
-    border-radius: 30px;
-}
 
 .card-content{
-    padding: 20px;
+    color: black;
 }
 
-.article{
-    background-color: white;
-    width: 100vh;
-    height: 100px;
-    padding: 100px;
+.card-content a{
     color: black;
+    text-decoration: none;
+}
+
+
+.article{
+    width: 100vh;
+    padding: 10px 0;
+    color: black;
+    margin: 0 auto;
 }
 
 .body-container{
     color: black;
     background-color: white;
     margin: 0 auto;
-    height: 100vh;
+    min-height: 100vh;
     width: 75%;
+    padding: 10px 0;
 }
 
 .likes-container{
@@ -113,7 +116,9 @@ nav{
 
 footer{
     background-color: black;
-    justify-content: space-evenly;
+    bottom: 0%;
+    width: 100%;
+    height: 150px;
 }
 
 .footer-link a{

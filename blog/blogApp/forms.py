@@ -46,18 +46,16 @@ class EditForm(forms.ModelForm):
             for fields in self.visible_fields():
                 fields.field.widget.attrs["class"] = 'post-forms'
 
+
+
 class CommentForm(forms.ModelForm):
-    
+    body = forms.CharField(widget=forms.Textarea, label='')
+
     class Meta:
         model = Comment
-        fields = ('body',)
-        widgets = {
-            'body' : forms.Textarea(attrs={} ),
-
-        }
+        fields =['body']
 
         def __init__(self, *args, **kwargs):
             super(SignUpForm, self).__init__(*args, **kwargs)
             for fields in self.visible_fields():
                 fields.field.widget.attrs["class"] = 'post-forms'
-        
