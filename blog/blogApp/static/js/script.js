@@ -18,3 +18,7 @@ document.addEventListener('mouseenter', e=>{
     })
 })
 */
+
+var citySearch = "New York";
+
+console.log(`${citySearch}`)
