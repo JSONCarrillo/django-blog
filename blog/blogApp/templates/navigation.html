@@ -1,0 +1,45 @@
+{% block navigation %}
+{% load static %}
+<nav>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            {% if user.is_authenticated %}
+                {% if user.first_name %}
+                    <span class="top-bar-text">Hello, {{ user.first_name }}!</span>
+                {% else %}
+                    <span class="top-bar-text">Hello!</span>
+                {% endif %}
+            <span class="top-bar-text"><a href="{% url 'logout' %}">Logout</a></span>
+            {% else %}
+            <span class="top-bar-text"><a href="{% url 'register' %}">Create an Account</a></span>
+            <span class="top-bar-text"><a href="{% url 'login' %}">Login</a></span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="nav-container">
+        <div class="logo">
+            <span><a href="{% url 'index' %}">Jayce Carrillo</a></span>
+        </div>
+        <div class="categories">
+            {% if category_menu %}
+            {% for item in category_menu %}
+            <span class="link"><a href="{% url 'categories' item|slugify %}">{{ item|title }}</a></span>
+            {% if not forloop.last %}
+            <span class="link"> | </span>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="profile-container">
+            {% if user.is_authenticated %}
+                {% if user.profile.profile_pic %}
+                    <img src="{{ user.profile.profile_pic.url }}">
+                {% else %}
+                    <img src="{% static 'images/default-profile-pic.jpg' %}" style="width: 25px; border-radius: 60px;">
+                {% endif %}
+                <span style="color: black;">Profile</span>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% endblock %}

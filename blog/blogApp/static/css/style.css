@@ -11,7 +11,6 @@ body{
     width: 100vw;
     background-color: white;
     overflow-x: hidden;
-    position: relative;
 }
 
 nav{
@@ -79,7 +78,6 @@ nav{
 .blog-list{
     background-color: white;
     margin: 0 auto;
-    height: 100vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -98,18 +96,28 @@ nav{
 
 
 .article{
-    width: 100vh;
     padding: 10px 0;
     color: black;
     margin: 0 auto;
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.article > *{
+    padding: 25px;
 }
 
 .body-container{
+    width: 100vw;
+    display: inline-block;
     color: black;
     background-color: white;
     margin: 0 auto;
-    min-height: 100vh;
     padding: 10px 0;
+    height: max-content;
 }
 
 .likes-container{
@@ -117,10 +125,10 @@ nav{
 }
 
 footer{
-    background-color: black;
-    bottom: 0%;
-    width: 100%;
-    height: 150px;
+    width: 100%; height: 100px;
+    padding: 10px;
+    color: #fff; background-color: rgba(0,0,0);
+    display: inline-block;
 }
 
 .footer-link a{
@@ -135,12 +143,14 @@ form > p{
 }
 
 .blog-card{
-    width: 500px;
+    width: 750px;
+    border-radius: 20px;
     box-shadow: 3px 5px 5px 1px rgba(0, 0, 0, .2);
     margin: 20px;
     z-index: 2;
     transition: transform .5s;
 }
+
 
 .blog-card:hover{
     transform: scale(1.05);
@@ -148,13 +158,14 @@ form > p{
 
 .card-image{
     width: 100%;
-    height: 200px;
+    height: 400px;
     overflow: hidden;
+    border-radius: 20px 20px 0 0;
     z-index: 1;
     position: relative;
 }
 
 .card-image img{
     position: absolute;
-    width: 510px;
+    width: 100%;
 }
