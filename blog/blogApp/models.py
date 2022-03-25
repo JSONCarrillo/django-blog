@@ -5,6 +5,7 @@ from datetime import datetime, date
 from ckeditor.fields import RichTextField
 from django.contrib.auth.base_user import AbstractBaseUser
 
+# Category Model
 class Category(models.Model):
     name = models.CharField(max_length=50)
 
@@ -21,6 +22,7 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
+# Profile Model for when users create their own account
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     isAdmin = models.BooleanField(default=False)
@@ -37,9 +39,8 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
         
+# Post Model
 class Post(models.Model):
-
-
     title = models.CharField(max_length=150)
     title_tag = models.CharField(max_length=100)
     post_date = models.DateField(auto_now_add=True)
@@ -51,6 +52,7 @@ class Post(models.Model):
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
     image_alt = models.CharField(blank=True, null=True, max_length=50)
 
+    # Sorts by post date by most recent, if their is more than one post in the date, then it will sort those post by their id
     class Meta():
         ordering = ['-post_date', '-id']
 
@@ -60,9 +62,11 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('article', args=(str(self.id)))
 
+    # total likes
     def total_likes(self):
         return self.likes.count()
 
+# Comment Model
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
