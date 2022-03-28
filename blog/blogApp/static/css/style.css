@@ -102,7 +102,6 @@ nav{
     width: 33%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-evenly;
 }
 
@@ -168,4 +167,8 @@ form > p{
 .card-image img{
     position: absolute;
     width: 100%;
+}
+
+.post-title{
+    font-size: 52pt;
 }
