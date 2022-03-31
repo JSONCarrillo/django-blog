@@ -12,7 +12,7 @@
             <h1 class="post-title">{{ post.title }}</h1>
             <h2>{{ post.author.first_name }} {{ post.author.last_name }}</h2>
             <br>
-            <small>{{ post.post_date }}</small>
+            <h2>{{ post.post_date }}</h2>
             <a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a>
             <div class="likes-container">
                 <p>{{ total_likes }} Likes</p>
@@ -20,15 +20,15 @@
                     {% csrf_token %}
                     {% if user.is_authenticated %}
                         {% if liked %}
-                            <button type="submit", name="post_id", method="POST", value="{{ post.id }}">Unlike</button>
+                            <button type="submit", name="post_id", method="POST", value="{{ post.id }}" class="like-button" id="liked"><i class="fa-solid fa-thumbs-up"></i><span>Liked</span></button>
                         {% else %}
-                        <button type="submit", name="post_id", method="POST", value="{{ post.id }}">Like</button>
+                            <button type="submit", name="post_id", method="POST", value="{{ post.id }}" class="like-button" id="unliked"><i class="fa-solid fa-thumbs-up"></i> <span>Like</span></button>
                         {% endif %}
-                        {% else %}
+                    {% else %}
                         <small><a href="{% url 'login' %}">sign in</a> or <a href="{% url 'register' %}">register</a> to like this post</small>
-                        {% endif %}
-                    </form>
-                </div>
+                    {% endif %}
+                </form>
+            </div>
         </div>
         <div class="post-body">
             <p>{{ post.body | safe }}</p>
@@ -58,5 +58,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

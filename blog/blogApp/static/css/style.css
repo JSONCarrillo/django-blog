@@ -121,6 +121,7 @@ nav{
 
 .likes-container{
     display: flex;
+    justify-content: space-between;
 }
 
 footer{
@@ -171,4 +172,25 @@ form > p{
 
 .post-title{
     font-size: 52pt;
+}
+
+.like-button > *{
+    font-size: 20px;
+    padding: 10px 15px 10px 15px;
+}
+
+.like-button{
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#unliked{
+    color: green;
+}
+
+#liked{
+    color: white;
+    background-color: green;
 }
