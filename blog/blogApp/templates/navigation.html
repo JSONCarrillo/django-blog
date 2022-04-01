@@ -22,12 +22,12 @@
         </div>
         <div class="categories">
             {% if category_menu %}
-            {% for item in category_menu %}
-            <span class="link"><a href="{% url 'categories' item|slugify %}">{{ item|title }}</a></span>
-            {% if not forloop.last %}
-            <span class="link"> | </span>
-            {% endif %}
-            {% endfor %}
+                {% for item in category_menu %}
+                <span class="link"><a href="{% url 'categories' item|slugify %}">{{ item|title }}</a></span>
+                {% if not forloop.last %}
+                <span class="link"> | </span>
+                {% endif %}
+                {% endfor %}
             {% endif %}
         </div>
         <div class="profile-container">

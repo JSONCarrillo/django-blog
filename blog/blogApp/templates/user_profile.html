@@ -2,6 +2,6 @@
 {%block title%}{{ profile.user.first_name}}{%endblock%}
 {%block content%}
     <div class="body-container">
-        {%profile.user.first_name%}{% profile.user.last_name %}
+        {{ profile.user.first_name }} {{ profile.user.last_name }}
     </div>
 {%endblock%}

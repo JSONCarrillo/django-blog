@@ -110,8 +110,7 @@ nav{
 }
 
 .body-container{
-    width: 100vw;
-    display: inline-block;
+    width: 100%;
     color: black;
     background-color: white;
     margin: 0 auto;
@@ -121,7 +120,7 @@ nav{
 
 .likes-container{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
 footer{

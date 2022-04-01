@@ -4,16 +4,20 @@
 <div class="body-container">
     <div class="article">
         <div class="post-image-container">
+            <h3><a href="{% url 'categories' post.category|slugify %}">{{ post.category|title }}</a></h3>
             {% if post.header_image %}
                 <img src="{{ post.header_image.url}}" alt="{{ post.image_alt}}">
             {% endif %}
         </div>
         <div class="post-heading">
             <h1 class="post-title">{{ post.title }}</h1>
-            <h2>{{ post.author.first_name }} {{ post.author.last_name }}</h2>
-            <br>
-            <h2>{{ post.post_date }}</h2>
-            <a href="{% url 'categories' post.category|slugify %}">{{ post.category}}</a>
+            <div>
+                {% if post.author.profile.profile_pic %}
+                    <img src="{{ post.author.profile.profile_pic.url }}">
+                {% endif %}
+                <a href="{% url 'profile' author.pk %}">{{ post.author.first_name }} {{ post.author.last_name }}</a>
+                <h3>{{ post.post_date }}</h3>
+            </div>
             <div class="likes-container">
                 <p>{{ total_likes }} Likes</p>
                 <form action="{% url 'like_post' post.pk %}">
