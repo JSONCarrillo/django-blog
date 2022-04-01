@@ -2,7 +2,6 @@
 {% block title %}{{category}}{% endblock %}
 {% block content %}
 {% if category_posts %}
-<div class="body-container">
     <h2>{{ category }}</h2>
     <div class="blog-list">
         {% for post in category_posts %}
@@ -20,7 +19,6 @@
             </div>
         {% endfor %}
     </div>
-</div>
 {% else %}
     <h1>Sucks to be you</h1>
 {% endif %}

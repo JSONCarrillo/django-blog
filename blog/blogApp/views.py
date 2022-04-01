@@ -124,3 +124,9 @@ class UserProfileView(DetailView):
     model = Profile
     fields = '__all__'
     template_name = 'user_profile.html'
+
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(UserProfileView, self).get_context_data(*args, **kwargs)
+        context["category_menu"] = category_menu
+        return context

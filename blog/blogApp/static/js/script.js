@@ -17,8 +17,8 @@ document.addEventListener('mouseenter', e=>{
         dropdown.classList.remove('active')
     })
 })
-*/
 
 var citySearch = "New York";
 
 console.log(`${citySearch}`)
+*/

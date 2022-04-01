@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}{{ post.title_tag }}{% endblock %}
 {% block content %}
-<div class="body-container">
     <div class="article">
         <div class="post-image-container">
             <h3><a href="{% url 'categories' post.category|slugify %}">{{ post.category|title }}</a></h3>
@@ -15,7 +14,7 @@
                 {% if post.author.profile.profile_pic %}
                     <img src="{{ post.author.profile.profile_pic.url }}">
                 {% endif %}
-                <a href="{% url 'profile' author.pk %}">{{ post.author.first_name }} {{ post.author.last_name }}</a>
+                <a href="{% url 'profile' post.author.pk %}">{{ post.author.first_name }} {{ post.author.last_name }}</a>
                 <h3>{{ post.post_date }}</h3>
             </div>
             <div class="likes-container">
@@ -61,5 +60,4 @@
             {% endif %}
         </div>
     </div>
-</div>
 {% endblock %}

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Delete Post{% endblock %}
 {% block content %}
-<div class="body-container">
     {% if user.is_authenticated %}
     {% if user.id == post.author.id %}
     <h1> Are You Sure You Want to Delete this post?</h1>
@@ -14,5 +13,4 @@
     {% else %}
         <h1>Sike you thought bitch</h1>
     {% endif %}
-</div>
 {% endblock %}

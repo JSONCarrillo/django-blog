@@ -1,5 +1,17 @@
 {% block navigation %}
 {% load static %}
+
+<div class="container-fluid">
+    <ul class="nav justify-content-center">
+        {% if category_menu %}
+            {% for item in category_menu %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'categories' item|slugify %}">{{ item|title }}</a></li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</div>
+
+<!--
 <nav>
     <div class="top-bar">
         <div class="top-bar-content">
@@ -16,14 +28,14 @@
             {% endif %}
         </div>
     </div>
-    <div class="nav-container">
+    <div class="nav">
         <div class="logo">
             <span><a href="{% url 'index' %}">Jayce Carrillo</a></span>
         </div>
-        <div class="categories">
+        <div class="container">
             {% if category_menu %}
                 {% for item in category_menu %}
-                <span class="link"><a href="{% url 'categories' item|slugify %}">{{ item|title }}</a></span>
+                <span class="nav-item"><a class="nav-link" href="{% url 'categories' item|slugify %}">{{ item|title }}</a></span>
                 {% if not forloop.last %}
                 <span class="link"> | </span>
                 {% endif %}
@@ -42,4 +54,5 @@
         </div>
     </div>
 </nav>
+-->
 {% endblock %}

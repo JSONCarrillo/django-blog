@@ -2,15 +2,15 @@
 {% block title %}Create New Blog Post{% endblock %}
 {% block content %}
     {% if user.is_authenticated %}
-    {% if user.id == post.author.id %}
-        <h2>Update {{ post.title }}</h2>
+    {% if user.id == profile.user.id %}
+        <h2>Update Profile</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <table>
                 {{ form.as_p}}
                 {{form.media}}
             </table>
-            <button>Post</button>
+            <button>Update</button>
         </form>
     {% endif %}
     {% else %}

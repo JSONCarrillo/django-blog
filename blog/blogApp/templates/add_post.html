@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Create New Blog Post{% endblock %}
 {% block content %}
-<div class="body-container">
     {% if user.is_authenticated %}
         {% if user.profile.isWriter %}
             <h2>Create New Blog Post</h2>
@@ -17,7 +16,6 @@
     {% else %}
         <h1>Sike you thought bitch</h1>
     {% endif %}
-</div>
 
 <script>
     const author = "{{ user.id }}";
