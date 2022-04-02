@@ -3,19 +3,47 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container justify-content-center">
         {% for post in object_list %}
-                <div class="card" href="{% url 'article' post.pk %}">
-                    <a href="{% url 'article' post.pk %}">
+        <div class="card mb-3" href="{% url 'article' post.pk %}">
+            <div class="row g-0">
+                {% if post.header_image %}
+                    <div class="col-md-4">
+                        <img src="{{ post.header_image.url }}" class="img-fluid rounded-start" alt="">
+                    </div>
+                {% endif %}
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text"><small>{{ post.category }}</small></p>
+                        <h3 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.article_hook }}</p>
+                        <p class="card-text">{{ post.author.first_name }} {{ post.author.last_name }}</p>
+                        <p class="card-text"><small>Posted: {{ post.post_date }}</small></p>
+                        {% if user.is_authenticated and user.id == post.author.id %}
+                            <a href="{% url 'update-post' post.pk %}">edit post</a>
+                            <a href="{% url 'delete-post' post.pk %}">delete post</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+<!--
+                <div class="card mb-3" href="{% url 'article' post.pk %}">
+                    <a style="text-decoration: none; color: black; display: flex;" href="{% url 'article' post.pk %}">
                         {% if post.header_image %}
                         <div class="card-image">
+                            <img src="{{ post.header_image.url }}" class="card-img-top" alt="">
                         </div>
                         {% endif %}
-                        <div class="card-body">
-                            <h2>{{ post.title }}</h2>
+                        <div class="card-body text-end">
+                            <h5 class="card-title">{{ post.title }}</h2>
                             <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
                             <small>{{ post.post_date }}</small>
-                            <p>{{ post.article_hook }}</p>
+                            <p class="card-text">{{ post.article_hook }}</p>
                             {% if user.is_authenticated and user.id == post.author.id %}
                                 <a href="{% url 'update-post' post.pk %}">edit post</a>
                                 <a href="{% url 'delete-post' post.pk %}">delete post</a>
@@ -23,11 +51,5 @@
                         </div>    
                     </a>
                 </div>
-        {% endfor %}
-    </div>
-    <style>
-        .card-content{
-            background-image: url("{{ post.header_image.url }}") repeat-x scroll center top transparent;
-        }
-    </style>
-{% endblock %}
+
+-->

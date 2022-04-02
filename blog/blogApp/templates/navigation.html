@@ -1,14 +1,44 @@
 {% block navigation %}
 {% load static %}
 
-<div class="container-fluid">
-    <ul class="nav justify-content-center">
-        {% if category_menu %}
-            {% for item in category_menu %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'categories' item|slugify %}">{{ item|title }}</a></li>
-            {% endfor %}
+<div class="top-bar" style="background-color:black;">
+    <div class="top-bar-content">
+        {% if user.is_authenticated %}
+            {% if user.first_name %}
+                <span class="top-bar-text">Hello, {{ user.first_name }}!</span>
+            {% else %}
+                <span class="top-bar-text">Hello!</span>
+            {% endif %}
+        <span class="top-bar-text"><a href="{% url 'logout' %}">Logout</a></span>
+        {% else %}
+        <span class="top-bar-text"><a href="{% url 'register' %}">Create an Account</a></span>
+        <span class="top-bar-text"><a href="{% url 'login' %}">Login</a></span>
         {% endif %}
-    </ul>
+    </div>
+</div>
+<div class="navbar sticky-top bg-light mb-3" >
+    <div class="container-fluid" >
+        <a href="{% url 'index' %}" class="navbar-brand">Jayce Carrillo</a>
+        <div class="justify-content-center">
+            <ul class="nav">
+                {% if category_menu %}
+                    {% for item in category_menu %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'categories' item|slugify %}">{{ item|title }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+        <div class="profile-container" style="display: flex; flex-direction: column; align-items: center;">
+            {% if user.is_authenticated %}
+                {% if user.profile.profile_pic %}
+                    <img src="{{ user.profile.profile_pic.url }}">
+                {% else %}
+                    <img src="{% static 'images/default-profile-pic.jpg' %}" style="width: 25px; border-radius: 60px;">
+                {% endif %}
+                <span style="color: black;">Profile</span>
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 <!--

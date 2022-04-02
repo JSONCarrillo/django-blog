@@ -38,6 +38,11 @@ class Profile(models.Model):
     
     def __str__(self):
         return str(self.user)
+
+choices = Category.objects.all().values_list('name', 'name')
+choice_list = []
+for choice in choices:
+    choice_list.append(choice) 
         
 # Post Model
 class Post(models.Model):
@@ -45,7 +50,7 @@ class Post(models.Model):
     title_tag = models.CharField(max_length=100)
     post_date = models.DateField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.CharField(max_length=50, default='uncategorized')
+    category = models.CharField(max_length=50, choices=choice_list, default='uncategorized')
     article_hook = models.TextField()
     body = RichTextField(blank=True, null=True)
     likes = models.ManyToManyField(User, related_name="blog_posts")
