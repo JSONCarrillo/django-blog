@@ -1,7 +1,7 @@
 {% block navigation %}
 {% load static %}
 
-<div class="top-bar" style="background-color:black;">
+<div class="top-bar">
     <div class="top-bar-content">
         {% if user.is_authenticated %}
             {% if user.first_name %}
@@ -9,14 +9,14 @@
             {% else %}
                 <span class="top-bar-text">Hello!</span>
             {% endif %}
-        <span class="top-bar-text"><a href="{% url 'logout' %}">Logout</a></span>
+        <span class="top-bar-text"><a class="nav-link" href="{% url 'logout' %}">Logout</a></span>
         {% else %}
-        <span class="top-bar-text"><a href="{% url 'register' %}">Create an Account</a></span>
-        <span class="top-bar-text"><a href="{% url 'login' %}">Login</a></span>
+        <span class="top-bar-text"><a class="nav-link" href="{% url 'register' %}">Create an Account</a></span>
+        <span class="top-bar-text"><a class="nav-link" href="{% url 'login' %}">Login</a></span>
         {% endif %}
     </div>
 </div>
-<div class="navbar sticky-top bg-light mb-3" style="overflow-y: hidden;">
+<div class="navbar sticky-top mb-3" >
     <div class="container-fluid" >
         <a href="{% url 'index' %}" class="navbar-brand">Jayce Carrillo</a>
         <div class="justify-content-center">
@@ -28,14 +28,14 @@
                 {% endif %}
             </ul>
         </div>
-        <div class="profile-container" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="profile-container" style="">
             {% if user.is_authenticated %}
                 {% if user.profile.profile_pic %}
                     <img src="{{ user.profile.profile_pic.url }}">
                 {% else %}
                     <img src="{% static 'images/default-profile-pic.jpg' %}" style="width: 25px; border-radius: 60px;">
                 {% endif %}
-                <span style="color: black;">Profile</span>
+                <span>Profile</span>
             {% endif %}
         </div>
     </div>

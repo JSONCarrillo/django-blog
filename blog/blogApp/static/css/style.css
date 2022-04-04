@@ -7,6 +7,7 @@
     padding: 0;
 }
 
+/* navigation */
 .top-bar{
     color: white;
     text-align: right;
@@ -18,11 +19,23 @@
     padding-left: 5px;
 }
 
-.profile-container{
-    padding-left:20px;
-    border-left: 1px solid rgb(170, 169, 169);
+.navbar{
+    background-color: #065C3A;
+    color: white;
+    padding: 20px 30px;
 }
 
+.top-bar-text > a{
+
+}
+
+.profile-container{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+/* index */
 
 .card-link{
     color: black;
@@ -33,3 +46,4 @@
 .card-link:hover{
     color: green;
 }
+
