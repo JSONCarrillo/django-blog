@@ -17,14 +17,22 @@ class PostForm(forms.ModelForm):
             'title' : forms.TextInput(attrs={}),
             'title_tag' : forms.TextInput(attrs={}),
             'author' : forms.TextInput(attrs={'id' : 'authorBox', 'value' : '', 'type' : 'hidden'}),
-            'category' : forms.ModelChoiceField(required=True, queryset=Category.objects.all().values_list('name', 'name')),
+            'category' : forms.Select(choices=choice_list),
             'article_hook' : forms.Textarea(),
             'body' : forms.Textarea(attrs={}),
             'image_alt' : forms.TextInput(attrs={}),
         }
 
         def __init__(self, *args, **kwargs):
+            # Query for all category objects
+            choices = Category.objects.all().values_list('name', 'name')
+            choice_list = []
+            for choice in choices:
+                choice_list.append(choice) 
+
             super(SignUpForm, self).__init__(*args, **kwargs)
+            super(MyForm, self).__init__(*args, **kwargs)
+            self.fields["category"].choices
             for fields in self.visible_fields():
                 fields.field.widget.attrs["class"] = 'post-forms'
 
@@ -47,11 +55,6 @@ class EditForm(forms.ModelForm):
             super(SignUpForm, self).__init__(*args, **kwargs)
             for fields in self.visible_fields():
                 fields.field.widget.attrs["class"] = 'post-forms'
-            
-            choices = Category.objects.all().values_list('name', 'name')
-            choice_list = []
-            for choice in choices:
-                choice_list.append(choice) 
 
 
 # Form for comments
