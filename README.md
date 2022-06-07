@@ -1,4 +1,4 @@
-# Jason Carrillo Blog
+# Django Blog
 
 A blog created using Django to showcase things I've learned, or anything I find interesting in the tech space, primarily focusing on technology and linux
 
